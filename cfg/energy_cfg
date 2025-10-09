@@ -1,0 +1,123 @@
+digraph clusterenergy_cfg {
+	graph [label=energy_cfg]
+	1 [label="from datetime import datetime
+from src.energy.DeviceSchedule import DeviceSchedule
+from src.energy.EnergyManagementResult import EnergyManagementResult
+\"\"\"Um sistema para gerenciar inteligentemente o consumo de energia.\"\"\"
+def manage_energy(self, current_price: float, price_threshold: float,...
+"]
+	subgraph clustermanage_energy {
+		graph [label=manage_energy]
+		3 [label="device_status: dict[str, bool] = {}
+energy_saving_mode = False
+temperature_regulation_active = False
+if current_price > price_threshold:
+"]
+		4 [label="energy_saving_mode = True
+"]
+		9 [label="for device, priority in device_priorities.items():
+"]
+		10 [label="if priority > 1:
+"]
+		12 [label="device_status[device] = False
+"]
+		12 -> 9 [label=""]
+		10 -> 12 [label="priority > 1"]
+		14 [label="device_status[device] = True
+"]
+		14 -> 9 [label=""]
+		10 -> 14 [label="(priority <= 1)"]
+		9 -> 10 [label="device_priorities.items()"]
+		5 [label="if current_time.hour >= 23 or current_time.hour < 6:
+"]
+		15 [label="for device in device_priorities:
+"]
+		17 [label="if device not in ('Security', 'Refrigerator'):
+"]
+		19 [label="device_status[device] = False
+"]
+		19 -> 15 [label=""]
+		17 -> 19 [label="device not in ('Security', 'Refrigerator')"]
+		17 -> 15 [label="(device in ('Security', 'Refrigerator'))"]
+		15 -> 17 [label=device_priorities]
+		16 [label="if current_temperature < desired_temperature_range[0]:
+"]
+		21 [label="device_status['Heating'] = True
+temperature_regulation_active = True
+"]
+		22 [label="devices_were_on = True
+"]
+		27 [label="while total_energy_used_today >= energy_usage_limit and devices_were_on:
+"]
+		28 [label="devices_to_turn_off = [device for device, priority in device_priorities.
+    items() if device_status.get(device, False) and priority > 1]
+if not devices_to_turn_off:
+"]
+		"28_calls" [label="device_priorities.items
+device_status.get" shape=box]
+		28 -> "28_calls" [label=calls style=dashed]
+		30 [label="devices_were_on = False
+"]
+		30 -> 27 [label=""]
+		28 -> 30 [label="not devices_to_turn_off"]
+		31 [label="for device in devices_to_turn_off:
+"]
+		32 [label="if total_energy_used_today < energy_usage_limit:
+"]
+		35 [label="device_status[device] = False
+total_energy_used_today -= 1
+"]
+		35 -> 31 [label=""]
+		32 -> 35 [label="(total_energy_used_today >= energy_usage_limit)"]
+		32 -> 27 [label="total_energy_used_today < energy_usage_limit"]
+		31 -> 32 [label=devices_to_turn_off]
+		31 -> 27 [label=""]
+		28 -> 31 [label="(not not devices_to_turn_off)"]
+		27 -> 28 [label="total_energy_used_today >= energy_usage_limit and devices_were_on"]
+		29 [label="for schedule in scheduled_devices:
+"]
+		36 [label="if schedule.scheduled_time == current_time:
+"]
+		38 [label="device_status[schedule.device_name] = True
+"]
+		38 -> 29 [label=""]
+		36 -> 38 [label="schedule.scheduled_time == current_time"]
+		36 -> 29 [label="(schedule.scheduled_time != current_time)"]
+		29 -> 36 [label=scheduled_devices]
+		37 [label="return EnergyManagementResult(device_status, energy_saving_mode,
+    temperature_regulation_active, total_energy_used_today)
+"]
+		29 -> 37 [label=""]
+		27 -> 29 [label="(not (total_energy_used_today >= energy_usage_limit and devices_were_on))"]
+		22 -> 27 [label=""]
+		21 -> 22 [label=""]
+		16 -> 21 [label="current_temperature < desired_temperature_range[0]"]
+		23 [label="if current_temperature > desired_temperature_range[1]:
+"]
+		24 [label="device_status['Cooling'] = True
+temperature_regulation_active = True
+"]
+		24 -> 22 [label=""]
+		23 -> 24 [label="current_temperature > desired_temperature_range[1]"]
+		26 [label="device_status['Heating'] = False
+device_status['Cooling'] = False
+"]
+		26 -> 22 [label=""]
+		23 -> 26 [label="(current_temperature <= desired_temperature_range[1])"]
+		16 -> 23 [label="(current_temperature >= desired_temperature_range[0])"]
+		15 -> 16 [label=""]
+		5 -> 15 [label="current_time.hour >= 23 or current_time.hour < 6"]
+		5 -> 16 [label="(not (current_time.hour >= 23 or current_time.hour < 6))"]
+		9 -> 5 [label=""]
+		4 -> 9 [label=""]
+		3 -> 4 [label="current_price > price_threshold"]
+		6 [label="for device in device_priorities:
+"]
+		7 [label="device_status[device] = True
+"]
+		7 -> 6 [label=""]
+		6 -> 7 [label=device_priorities]
+		6 -> 5 [label=""]
+		3 -> 6 [label="(current_price <= price_threshold)"]
+	}
+}
