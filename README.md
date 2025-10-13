@@ -48,6 +48,12 @@ On macOS (Homebrew):
 brew install graphviz
 ```
 
+On Arch Linux:
+
+```bash
+sudo pacman -S graphviz
+```
+
 
 ## Running `generate_graph.py`
 
