@@ -1,6 +1,6 @@
 digraph clusterflight_cfg {
 	graph [label=flight_cfg]
-	1 [label=" 1 from datetime import datetime
+	1 [label="1: from datetime import datetime
 from src.flight.BookingResult import BookingResult
 \"\"\"
     Um sistema para gerenciar a reserva e o cancelamento de voos.
@@ -9,8 +9,8 @@ def book_flight(self, passengers: int, booking_time: datetime,...
 "]
 	subgraph clusterbook_flight {
 		graph [label=book_flight]
-		3 [label="\"\"\"
-        Processa a reserva ou cancelamento de um voo com base nos parâmetros fornecidos.
+		3 [label="3: \"\"\"
+        3: Processa a reserva ou cancelamento de um voo com base nos parâmetros fornecidos.
         \"\"\"
 final_price = 0.0
 refund_amount = 0.0
@@ -18,10 +18,10 @@ confirmation = False
 points_used = False
 if passengers > available_seats:
 "]
-		4 [label="return BookingResult(confirmation, final_price, refund_amount, points_used)
+		4 [label="4: return BookingResult(confirmation, final_price, refund_amount, points_used)
 "]
 		3 -> 4 [label="passengers > available_seats"]
-		5 [label="price_factor = previous_sales / 100.0 * 0.8
+		5 [label="5: price_factor = previous_sales / 100.0 * 0.8
 final_price = current_price * price_factor * passengers
 time_difference = departure_time - booking_time
 hours_to_departure = time_difference.total_seconds() / 3600
@@ -29,37 +29,37 @@ if hours_to_departure < 24:
 "]
 		"5_calls" [label="time_difference.total_seconds" shape=box]
 		5 -> "5_calls" [label=calls style=dashed]
-		7 [label="final_price += 100
+		7 [label="7: final_price += 100
 "]
-		8 [label="if passengers > 4:
+		8 [label="8: if passengers > 4:
 "]
-		9 [label="final_price *= 0.95
+		9 [label="9: final_price *= 0.95
 "]
-		10 [label="if reward_points_available > 0:
+		10 [label="10: if reward_points_available > 0:
 "]
-		11 [label="final_price -= reward_points_available * 0.01
+		11 [label="11: final_price -= reward_points_available * 0.01
 points_used = True
 "]
-		12 [label="if final_price < 0:
+		12 [label="12: if final_price < 0:
 "]
-		13 [label="final_price = 0
+		13 [label="13: final_price = 0
 "]
-		14 [label="if is_cancellation:
+		14 [label="14: if is_cancellation:
 "]
-		15 [label="if hours_to_departure >= 48:
+		15 [label="15: if hours_to_departure >= 48:
 "]
-		17 [label="refund_amount = final_price
+		17 [label="17: refund_amount = final_price
 "]
-		18 [label="return BookingResult(False, 0, refund_amount, False)
+		18 [label="18: return BookingResult(False, 0, refund_amount, False)
 "]
 		17 -> 18 [label=""]
 		15 -> 17 [label="hours_to_departure >= 48"]
-		19 [label="refund_amount = final_price * 0.5
+		19 [label="19: refund_amount = final_price * 0.5
 "]
 		19 -> 18 [label=""]
 		15 -> 19 [label="(hours_to_departure < 48)"]
 		14 -> 15 [label=is_cancellation]
-		16 [label="confirmation = True
+		16 [label="16: confirmation = True
 return BookingResult(confirmation, final_price, refund_amount, points_used)
 "]
 		14 -> 16 [label="(not is_cancellation)"]
