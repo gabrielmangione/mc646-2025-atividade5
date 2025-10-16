@@ -1,0 +1,84 @@
+digraph clustercfg_output {
+    graph [label=check_for_fraud]
+        1 [label="1. 
+is_fraudulent = False
+is_blocked = False
+verification_required = False
+risk_score = 0"]
+        2 [label="2. if current_transaction.amount > 10000:"]
+
+        1 -> 2 [label=""]
+
+        3 [label="3. is_fraudulent = True
+verification_required = True
+risk_score += 50"]
+
+        2 -> 3 [label="current_transaction.amount > 10000"]
+        2 -> 4 [label="(current_transaction.amount <= 10000)"]
+
+        4 [ label="4. recent_transaction_count = 0"]
+
+        5 [ label="5. for transaction in previous_transactions:"]
+
+        3 -> 4 [label=""]
+        4 -> 5 [label=""]
+
+        6 [ label="6. time_difference = current_transaction.timestamp - transaction.timestamp
+time_diff_minutes = time_difference.total_seconds() / 60"]
+        "6_calls" [label="time_difference.total_seconds" shape=box]
+        6 -> "6_calls" [label=calls style=dashed]
+        
+        7 [ label="7. if time_diff_minutes <= 60:"]
+        8 [ label="8. recent_transaction_count += 1"]
+        
+        6 -> 7 [label=""]
+        7 -> 8 [label="time_diff_minutes <= 60"]
+        8 -> 5 [label=""]
+        7 -> 5 [label="(time_diff_minutes > 60)"]
+        5 -> 6 [label=previous_transactions]
+        
+        5 -> 9 [label=""]
+        9 [ label="9. if recent_transaction_count > 10:"]
+        10 [ label="10. is_blocked = True
+risk_score += 30"]
+
+        9 -> 10 [label="recent_transaction_count > 10"]
+        9 -> 11 [label="(recent_transaction_count <= 10)"]
+
+        11 [ label="11. if previous_transactions:"]
+        10 -> 11 [label=""]
+        11 -> 12 [label=previous_transactions]
+        11 -> 16 [label="(not previous_transactions)"]
+
+        12 [ label="12. last_transaction = previous_transactions[-1]
+time_since_last = current_transaction.timestamp - last_transaction.timestamp
+minutes_since_last = time_since_last.total_seconds() / 60"]
+
+        "12_calls" [label="time_since_last.total_seconds" shape=box]
+        12 -> "12_calls" [label=calls style=dashed]
+        13 [ label="13. if minutes_since_last < 30 : "]
+        13 -> 14 [label="minutes_since_last < 30"]
+        14 [ label="14. if last_transaction.location != current_transaction.location: "]
+        14 -> 15 [label="last_transaction.location != current_transaction.location"]
+        15 [ label="15. is_fraudulent = True
+verification_required = True
+risk_score += 20
+"]      
+        
+        12 -> 13 [label=""]
+        16 [ label="16. if current_transaction.location in blacklisted_locations:"]
+        13 -> 16 [label="(minutes_since_last >= 30)"]
+        14 -> 16 [label="(last_transaction.location == current_transaction.location)"]
+        
+        15 -> 16 [label=""]
+
+        17 [ label="17. is_blocked = True
+risk_score = 100
+"]
+        18 [ label="18. return FraudCheckResult(is_fraudulent, is_blocked, verification_required,
+    risk_score)
+"]
+        17 -> 18 [label=""]
+        16 -> 17 [label="current_transaction.location in blacklisted_locations"]
+        16 -> 18 [label="(current_transaction.location not in blacklisted_locations)"]
+}
