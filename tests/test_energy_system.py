@@ -56,7 +56,7 @@ class TestEnergyManagementSystem:
         schedule = DeviceSchedule(device_name="Forno", scheduled_time=datetime(2024, 10, 1, 18, 0))
         
         result = system.manage_energy(
-            current_price=0.25,  # ativa modo economia
+            current_price=0.25,  
             price_threshold=0.20,
             device_priorities={"Aquecimento": 1, "Luzes": 2, "Forno": 3},
             current_time=datetime(2024, 10, 1, 18, 0),  # coincide com agendamento
@@ -67,11 +67,11 @@ class TestEnergyManagementSystem:
             scheduled_devices=[schedule]
         )
 
-        # Esperado: modo economia + agendamento ativo
+        
         assert result.energy_saving_mode is True
-        assert result.device_status["Aquecimento"] is True  # prioridade alta
-        assert result.device_status["Luzes"] is False        # desligada pelo modo economia
-        assert result.device_status["Forno"] is True         # ligado pelo agendamento
+        assert result.device_status["Aquecimento"] is True
+        assert result.device_status["Luzes"] is False        
+        assert result.device_status["Forno"] is True         
 
     def test_temperature_regulation_heating_on(self):
         """Test that heating turns on when current temperature is below desired range."""
@@ -134,9 +134,9 @@ class TestEnergyManagementSystem:
             scheduled_devices=[]
         )
 
-        # Esperado: modo normal (sem economia), mas controle de limite ativo
+        
         assert result.energy_saving_mode is False
-        assert result.device_status["Aquecimento"] is True  # prioridade alta
-        assert result.device_status["Luzes"] is False        # baixa prioridade desligada
-        assert result.device_status["TV"] is False           # desligada primeiro
+        assert result.device_status["Aquecimento"] is True  
+        assert result.device_status["Luzes"] is False        
+        assert result.device_status["TV"] is False           
 
