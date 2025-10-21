@@ -1,3 +1,4 @@
 pytest==8.4.2
 staticfg==0.9.5
 pytest-cov==7.0.0
+mutmut
