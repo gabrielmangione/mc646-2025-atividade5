@@ -173,3 +173,95 @@ class TestFlightBookingSystem:
         assert result.total_price == 0.0
         assert abs(result.refund_amount - 32.0) < 0.01
         assert result.points_used is False
+
+    def test_booking_with_exact_available_seats(self):
+        """Kills mutant 78: passengers >= available_seats"""
+        result = self.system.book_flight(
+            passengers=5,
+            booking_time=self.base_time,
+            available_seats=5,
+            current_price=100.0,
+            previous_sales=50,
+            is_cancellation=False,
+            departure_time=self.base_time + timedelta(hours=48),
+            reward_points_available=0
+        )
+        assert result.confirmation is True
+
+    def test_group_discount_boundary_no_discount_for_4_passengers(self):
+        """Kills mutant 97: passengers >= 4"""
+        result = self.system.book_flight(
+            passengers=4,
+            booking_time=self.base_time,
+            available_seats=10,
+            current_price=100.0,
+            previous_sales=80,
+            is_cancellation=False,
+            departure_time=self.base_time + timedelta(hours=48),
+            reward_points_available=0
+        )
+        # Expected: 100 * (80/100 * 0.8) * 4 = 256. No discount.
+        assert abs(result.total_price - 256.0) < 0.01
+
+    def test_group_discount_boundary_with_discount_for_5_passengers(self):
+        """Kills mutant 98: passengers > 5"""
+        result = self.system.book_flight(
+            passengers=5,
+            booking_time=self.base_time,
+            available_seats=10,
+            current_price=100.0,
+            previous_sales=80,
+            is_cancellation=False,
+            departure_time=self.base_time + timedelta(hours=48),
+            reward_points_available=0
+        )
+        # Expected: 100 * (80/100 * 0.8) * 5 = 320. With 5% discount -> 304
+        assert abs(result.total_price - 304.0) < 0.01
+
+    def test_reward_points_boundary_with_one_point(self):
+        """Kills mutant 103: reward_points_available > 1"""
+        result = self.system.book_flight(
+            passengers=1,
+            booking_time=self.base_time,
+            available_seats=10,
+            current_price=100.0,
+            previous_sales=10,
+            is_cancellation=False,
+            departure_time=self.base_time + timedelta(hours=48),
+            reward_points_available=1
+        )
+        assert result.points_used is True
+        # Expected: 100 * (10/100 * 0.8) * 1 = 8. After 1 point -> 7.99
+        assert abs(result.total_price - 7.99) < 0.01
+
+    def test_price_adjustment_between_zero_and_one(self):
+        """Kills mutant 111: final_price < 1"""
+        result = self.system.book_flight(
+            passengers=1,
+            booking_time=self.base_time,
+            available_seats=10,
+            current_price=10.0,
+            previous_sales=5,
+            is_cancellation=False,
+            departure_time=self.base_time + timedelta(hours=48),
+            reward_points_available=0
+        )
+        # Expected: 10 * (5/100 * 0.8) * 1 = 0.4. Should not be adjusted to 0.
+        assert result.total_price > 0
+        assert abs(result.total_price - 0.4) < 0.01
+
+    def test_cancellation_at_full_refund_boundary(self):
+        """Kills mutants 114 and 115 related to refund time boundary."""
+        result = self.system.book_flight(
+            passengers=1,
+            booking_time=self.base_time,
+            available_seats=10,
+            current_price=100.0,
+            previous_sales=100,
+            is_cancellation=True,
+            departure_time=self.base_time + timedelta(hours=48),
+            reward_points_available=0
+        )
+        # Expected price: 100 * (100/100 * 0.8) * 1 = 80.
+        # Should get a full refund as it's exactly 48 hours.
+        assert abs(result.refund_amount - 80.0) < 0.01
