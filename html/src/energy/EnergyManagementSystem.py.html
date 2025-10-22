@@ -1,4 +1,4 @@
-<html><body><h1>src/energy/EnergyManagementSystem.py</h1>Killed 48 out of 69 mutants<h2>Timeouts</h2>Mutants that made the test suite take a lot longer so the tests were killed.<h3>Mutant 50</h3><pre>--- src/energy/EnergyManagementSystem.py
+<html><body><h1>src/energy/EnergyManagementSystem.py</h1>Killed 61 out of 69 mutants<h2>Timeouts</h2>Mutants that made the test suite take a lot longer so the tests were killed.<h3>Mutant 50</h3><pre>--- src/energy/EnergyManagementSystem.py
 +++ src/energy/EnergyManagementSystem.py
 @@ -53,7 +53,7 @@
  
@@ -42,139 +42,7 @@
                       break
                   device_status[device] = False
                   total_energy_used_today -= 1
-</pre><h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 6</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -22,7 +22,7 @@
-         temperature_regulation_active = False
- 
-         # 1. Ativa o modo de economia de energia se o preço exceder o limite
--        if current_price > price_threshold:
-+        if current_price >= price_threshold:
-             energy_saving_mode = True
-             for device, priority in device_priorities.items():
-                 if priority > 1:  
-</pre><h3>Mutant 19</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -35,7 +35,7 @@
-                 device_status[device] = True
- 
-         # 2. Modo noturno entre 23h e 6h
--        if current_time.hour >= 23 or current_time.hour < 6:
-+        if current_time.hour >= 23 or current_time.hour <= 6:
-             for device in device_priorities:
-                 if device not in ("Security", "Refrigerator"):
-                     device_status[device] = False
-</pre><h3>Mutant 20</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -35,7 +35,7 @@
-                 device_status[device] = True
- 
-         # 2. Modo noturno entre 23h e 6h
--        if current_time.hour >= 23 or current_time.hour < 6:
-+        if current_time.hour >= 23 or current_time.hour < 7:
-             for device in device_priorities:
-                 if device not in ("Security", "Refrigerator"):
-                     device_status[device] = False
-</pre><h3>Mutant 27</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -41,7 +41,7 @@
-                     device_status[device] = False
- 
-         # 3. Regulação de temperatura
--        if current_temperature < desired_temperature_range[0]:
-+        if current_temperature <= desired_temperature_range[0]:
-             device_status["Heating"] = True
-             temperature_regulation_active = True
-         elif current_temperature > desired_temperature_range[1]:
-</pre><h3>Mutant 34</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -44,7 +44,7 @@
-         if current_temperature < desired_temperature_range[0]:
-             device_status["Heating"] = True
-             temperature_regulation_active = True
--        elif current_temperature > desired_temperature_range[1]:
-+        elif current_temperature >= desired_temperature_range[1]:
-             device_status["Cooling"] = True
-             temperature_regulation_active = True
-         else:
-</pre><h3>Mutant 41</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -48,7 +48,7 @@
-             device_status["Cooling"] = True
-             temperature_regulation_active = True
-         else:
--            device_status["Heating"] = False
-+            device_status["XXHeatingXX"] = False
-             device_status["Cooling"] = False
- 
- 
-</pre><h3>Mutant 42</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -48,7 +48,7 @@
-             device_status["Cooling"] = True
-             temperature_regulation_active = True
-         else:
--            device_status["Heating"] = False
-+            device_status["Heating"] = True
-             device_status["Cooling"] = False
- 
- 
-</pre><h3>Mutant 43</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -48,7 +48,7 @@
-             device_status["Cooling"] = True
-             temperature_regulation_active = True
-         else:
--            device_status["Heating"] = False
-+            device_status["Heating"] = None
-             device_status["Cooling"] = False
- 
- 
-</pre><h3>Mutant 44</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -49,7 +49,7 @@
-             temperature_regulation_active = True
-         else:
-             device_status["Heating"] = False
--            device_status["Cooling"] = False
-+            device_status["XXCoolingXX"] = False
- 
- 
-         devices_were_on = True
-</pre><h3>Mutant 45</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -49,7 +49,7 @@
-             temperature_regulation_active = True
-         else:
-             device_status["Heating"] = False
--            device_status["Cooling"] = False
-+            device_status["Cooling"] = True
- 
- 
-         devices_were_on = True
-</pre><h3>Mutant 46</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -49,7 +49,7 @@
-             temperature_regulation_active = True
-         else:
-             device_status["Heating"] = False
--            device_status["Cooling"] = False
-+            device_status["Cooling"] = None
- 
- 
-         devices_were_on = True
-</pre><h3>Mutant 49</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -53,7 +53,7 @@
- 
- 
-         devices_were_on = True
--        while total_energy_used_today >= energy_usage_limit and devices_were_on:
-+        while total_energy_used_today > energy_usage_limit and devices_were_on:
-             devices_to_turn_off = [
-                 device for device, priority in device_priorities.items()
-                 if device_status.get(device, False) and priority > 1
-</pre><h3>Mutant 51</h3><pre>--- src/energy/EnergyManagementSystem.py
+</pre><h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 51</h3><pre>--- src/energy/EnergyManagementSystem.py
 +++ src/energy/EnergyManagementSystem.py
 @@ -56,7 +56,7 @@
          while total_energy_used_today >= energy_usage_limit and devices_were_on:
@@ -218,15 +86,4 @@
                   device_status[device] = False
                   total_energy_used_today -= 1
  
-</pre><h3>Mutant 65</h3><pre>--- src/energy/EnergyManagementSystem.py
-+++ src/energy/EnergyManagementSystem.py
-@@ -67,7 +67,7 @@
-                  if total_energy_used_today < energy_usage_limit:
-                      break
-                  device_status[device] = False
--                 total_energy_used_today -= 1
-+                 total_energy_used_today += 1
- 
-         # 5. Lida com dispositivos agendados
-         for schedule in scheduled_devices:
 </pre></body></html>
