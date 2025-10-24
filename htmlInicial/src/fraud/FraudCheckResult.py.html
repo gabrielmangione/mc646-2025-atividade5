@@ -1,0 +1,83 @@
+<html><body><h1>src/fraud/FraudCheckResult.py</h1>Killed 0 out of 8 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 148</h3><pre>--- src/fraud/FraudCheckResult.py
++++ src/fraud/FraudCheckResult.py
+@@ -8,7 +8,7 @@
+ 
+     def __repr__(self) -> str:
+         """Retorna uma representação legível do objeto."""
+-        return (f"FraudCheckResult(is_fraudulent={self.is_fraudulent}, "
++        return (f"XXFraudCheckResult(is_fraudulent={self.is_fraudulent}, XX"
+                 f"is_blocked={self.is_blocked}, "
+                 f"verification_required={self.verification_required}, "
+                 f"risk_score={self.risk_score})")
+</pre><h3>Mutant 149</h3><pre>--- src/fraud/FraudCheckResult.py
++++ src/fraud/FraudCheckResult.py
+@@ -9,6 +9,6 @@
+     def __repr__(self) -> str:
+         """Retorna uma representação legível do objeto."""
+         return (f"FraudCheckResult(is_fraudulent={self.is_fraudulent}, "
+-                f"is_blocked={self.is_blocked}, "
++                f"XXis_blocked={self.is_blocked}, XX"
+                 f"verification_required={self.verification_required}, "
+                 f"risk_score={self.risk_score})")
+</pre><h3>Mutant 150</h3><pre>--- src/fraud/FraudCheckResult.py
++++ src/fraud/FraudCheckResult.py
+@@ -10,5 +10,5 @@
+         """Retorna uma representação legível do objeto."""
+         return (f"FraudCheckResult(is_fraudulent={self.is_fraudulent}, "
+                 f"is_blocked={self.is_blocked}, "
+-                f"verification_required={self.verification_required}, "
++                f"XXverification_required={self.verification_required}, XX"
+                 f"risk_score={self.risk_score})")
+</pre><h3>Mutant 151</h3><pre>--- src/fraud/FraudCheckResult.py
++++ src/fraud/FraudCheckResult.py
+@@ -11,4 +11,4 @@
+         return (f"FraudCheckResult(is_fraudulent={self.is_fraudulent}, "
+                 f"is_blocked={self.is_blocked}, "
+                 f"verification_required={self.verification_required}, "
+-                f"risk_score={self.risk_score})")
++                f"XXrisk_score={self.risk_score})XX")
+</pre><h2>Suspicious</h2>Mutants that made the test suite take longer, but otherwise seemed ok<h3>Mutant 144</h3><pre>--- src/fraud/FraudCheckResult.py
++++ src/fraud/FraudCheckResult.py
+@@ -1,7 +1,7 @@
+ class FraudCheckResult:
+     """Armazena os resultados de uma verificação de detecção de fraude."""
+     def __init__(self, is_fraudulent: bool, is_blocked: bool, verification_required: bool, risk_score: int):
+-        self.is_fraudulent = is_fraudulent
++        self.is_fraudulent = None
+         self.is_blocked = is_blocked
+         self.verification_required = verification_required
+         self.risk_score = risk_score
+</pre><h3>Mutant 145</h3><pre>--- src/fraud/FraudCheckResult.py
++++ src/fraud/FraudCheckResult.py
+@@ -2,7 +2,7 @@
+     """Armazena os resultados de uma verificação de detecção de fraude."""
+     def __init__(self, is_fraudulent: bool, is_blocked: bool, verification_required: bool, risk_score: int):
+         self.is_fraudulent = is_fraudulent
+-        self.is_blocked = is_blocked
++        self.is_blocked = None
+         self.verification_required = verification_required
+         self.risk_score = risk_score
+ 
+</pre><h3>Mutant 146</h3><pre>--- src/fraud/FraudCheckResult.py
++++ src/fraud/FraudCheckResult.py
+@@ -3,7 +3,7 @@
+     def __init__(self, is_fraudulent: bool, is_blocked: bool, verification_required: bool, risk_score: int):
+         self.is_fraudulent = is_fraudulent
+         self.is_blocked = is_blocked
+-        self.verification_required = verification_required
++        self.verification_required = None
+         self.risk_score = risk_score
+ 
+     def __repr__(self) -> str:
+</pre><h3>Mutant 147</h3><pre>--- src/fraud/FraudCheckResult.py
++++ src/fraud/FraudCheckResult.py
+@@ -4,7 +4,7 @@
+         self.is_fraudulent = is_fraudulent
+         self.is_blocked = is_blocked
+         self.verification_required = verification_required
+-        self.risk_score = risk_score
++        self.risk_score = None
+ 
+     def __repr__(self) -> str:
+         """Retorna uma representação legível do objeto."""
+</pre></body></html>

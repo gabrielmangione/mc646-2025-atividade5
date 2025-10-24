@@ -22,7 +22,7 @@ class SmartEnergyManagementSystem:
         temperature_regulation_active = False
 
         # 1. Ativa o modo de economia de energia se o preço exceder o limite
-        if current_price >= price_threshold:
+        if current_price > price_threshold:
             energy_saving_mode = True
             for device, priority in device_priorities.items():
                 if priority > 1:  

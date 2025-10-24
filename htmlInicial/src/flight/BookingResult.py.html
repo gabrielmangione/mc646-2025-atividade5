@@ -1,0 +1,72 @@
+<html><body><h1>src/flight/BookingResult.py</h1>Killed 1 out of 8 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 85</h3><pre>--- src/flight/BookingResult.py
++++ src/flight/BookingResult.py
+@@ -10,7 +10,7 @@
+ 
+     def __repr__(self):
+         """Retorna uma representação legível do objeto."""
+-        return (f"BookingResult(confirmation={self.confirmation}, "
++        return (f"XXBookingResult(confirmation={self.confirmation}, XX"
+                 f"total_price={self.total_price:.2f}, "
+                 f"refund_amount={self.refund_amount:.2f}, "
+                 f"points_used={self.points_used})")
+</pre><h3>Mutant 86</h3><pre>--- src/flight/BookingResult.py
++++ src/flight/BookingResult.py
+@@ -11,6 +11,6 @@
+     def __repr__(self):
+         """Retorna uma representação legível do objeto."""
+         return (f"BookingResult(confirmation={self.confirmation}, "
+-                f"total_price={self.total_price:.2f}, "
++                f"XXtotal_price={self.total_price:.2f}, XX"
+                 f"refund_amount={self.refund_amount:.2f}, "
+                 f"points_used={self.points_used})")
+</pre><h3>Mutant 87</h3><pre>--- src/flight/BookingResult.py
++++ src/flight/BookingResult.py
+@@ -12,5 +12,5 @@
+         """Retorna uma representação legível do objeto."""
+         return (f"BookingResult(confirmation={self.confirmation}, "
+                 f"total_price={self.total_price:.2f}, "
+-                f"refund_amount={self.refund_amount:.2f}, "
++                f"XXrefund_amount={self.refund_amount:.2f}, XX"
+                 f"points_used={self.points_used})")
+</pre><h3>Mutant 88</h3><pre>--- src/flight/BookingResult.py
++++ src/flight/BookingResult.py
+@@ -13,4 +13,4 @@
+         return (f"BookingResult(confirmation={self.confirmation}, "
+                 f"total_price={self.total_price:.2f}, "
+                 f"refund_amount={self.refund_amount:.2f}, "
+-                f"points_used={self.points_used})")
++                f"XXpoints_used={self.points_used})XX")
+</pre><h2>Suspicious</h2>Mutants that made the test suite take longer, but otherwise seemed ok<h3>Mutant 81</h3><pre>--- src/flight/BookingResult.py
++++ src/flight/BookingResult.py
+@@ -3,7 +3,7 @@
+     Uma classe para armazenar o resultado de uma operação de reserva de voo.
+     """
+     def __init__(self, confirmation, total_price, refund_amount, points_used):
+-        self.confirmation = confirmation
++        self.confirmation = None
+         self.total_price = total_price
+         self.refund_amount = refund_amount
+         self.points_used = points_used
+</pre><h3>Mutant 83</h3><pre>--- src/flight/BookingResult.py
++++ src/flight/BookingResult.py
+@@ -5,7 +5,7 @@
+     def __init__(self, confirmation, total_price, refund_amount, points_used):
+         self.confirmation = confirmation
+         self.total_price = total_price
+-        self.refund_amount = refund_amount
++        self.refund_amount = None
+         self.points_used = points_used
+ 
+     def __repr__(self):
+</pre><h3>Mutant 84</h3><pre>--- src/flight/BookingResult.py
++++ src/flight/BookingResult.py
+@@ -6,7 +6,7 @@
+         self.confirmation = confirmation
+         self.total_price = total_price
+         self.refund_amount = refund_amount
+-        self.points_used = points_used
++        self.points_used = None
+ 
+     def __repr__(self):
+         """Retorna uma representação legível do objeto."""
+</pre></body></html>

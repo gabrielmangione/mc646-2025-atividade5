@@ -1,0 +1,42 @@
+<html><body><h1>src/fraud/Transaction.py</h1>Killed 0 out of 4 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 215</h3><pre>--- src/fraud/Transaction.py
++++ src/fraud/Transaction.py
+@@ -9,4 +9,4 @@
+ 
+     def __repr__(self) -> str:
+         """Retorna uma representação legível do objeto."""
+-        return f"Transaction(amount={self.amount}, timestamp='{self.timestamp}', location='{self.location}')"
++        return f"XXTransaction(amount={self.amount}, timestamp='{self.timestamp}', location='{self.location}')XX"
+</pre><h2>Suspicious</h2>Mutants that made the test suite take longer, but otherwise seemed ok<h3>Mutant 212</h3><pre>--- src/fraud/Transaction.py
++++ src/fraud/Transaction.py
+@@ -3,7 +3,7 @@
+ class Transaction:
+     """Representa uma única transação financeira."""
+     def __init__(self, amount: float, timestamp: datetime, location: str):
+-        self.amount = amount
++        self.amount = None
+         self.timestamp = timestamp
+         self.location = location
+ 
+</pre><h3>Mutant 213</h3><pre>--- src/fraud/Transaction.py
++++ src/fraud/Transaction.py
+@@ -4,7 +4,7 @@
+     """Representa uma única transação financeira."""
+     def __init__(self, amount: float, timestamp: datetime, location: str):
+         self.amount = amount
+-        self.timestamp = timestamp
++        self.timestamp = None
+         self.location = location
+ 
+     def __repr__(self) -> str:
+</pre><h3>Mutant 214</h3><pre>--- src/fraud/Transaction.py
++++ src/fraud/Transaction.py
+@@ -5,7 +5,7 @@
+     def __init__(self, amount: float, timestamp: datetime, location: str):
+         self.amount = amount
+         self.timestamp = timestamp
+-        self.location = location
++        self.location = None
+ 
+     def __repr__(self) -> str:
+         """Retorna uma representação legível do objeto."""
+</pre></body></html>
